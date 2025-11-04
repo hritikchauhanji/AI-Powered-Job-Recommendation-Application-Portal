@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
-const bcrypt = require("bcryptjs");
+import bcrypt from "bcryptjs";
+import { AvailableUserRoles, UserRolesEnum } from "../constants.js";
 
 const userSchema = new Schema(
   {
@@ -31,13 +32,8 @@ const userSchema = new Schema(
     role: {
       type: String,
       enum: AvailableUserRoles,
-      default: UserRolesEnum.EMPLOYEE,
+      default: UserRolesEnum.CONDIDATE,
       required: true,
-    },
-    role: {
-      type: String,
-      enum: ["candidate", "recruiter", "admin"],
-      default: "candidate",
     },
     forgotPasswordToken: {
       type: String,
