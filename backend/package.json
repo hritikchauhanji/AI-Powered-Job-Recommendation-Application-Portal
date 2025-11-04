@@ -2,21 +2,21 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "backend of AI-Powered Job Recommendation & Application Portal",
+  "type": "module",
   "main": "src/server.js",
   "scripts": {
-    "dev": "node src/server.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "keywords": [
     "backend",
-    "AI-Powered",
-    "Job",
-    "Recommendation",
-    "&",
-    "Application",
-    "Portal",
+    "AI-Powered Job Recommendation And Application Portal",
     "node.js",
     "express.js"
   ],
   "author": "Hritik Chauhan",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
 }
