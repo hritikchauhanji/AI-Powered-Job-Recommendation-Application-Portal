@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "backend of AI-Powered Job Recommendation & Application Portal",
   "type": "module",
-  "main": "src/server.js",
+  "main": "api/server.js",
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js"
