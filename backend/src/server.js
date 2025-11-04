@@ -26,6 +26,8 @@ const initServer = async () => {
   }
 };
 
-await initServer();
+if (isVercel) {
+  await initServer();
+}
 
 export { handler };
