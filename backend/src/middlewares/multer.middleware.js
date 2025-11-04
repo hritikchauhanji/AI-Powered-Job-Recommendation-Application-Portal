@@ -24,13 +24,13 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// file filter for projectFile
+// file filter for ResumeFile
 const fileFilterForResumeFile = (req, file, cb) => {
   const ext = path.extname(file.originalname).toLowerCase();
   if (ext === ".pdf") {
     cb(null, true);
   } else {
-    cb(new Error("Only PDF file is allowed"));
+    cb(new Error("Only PDFs is allowed"));
   }
 };
 
