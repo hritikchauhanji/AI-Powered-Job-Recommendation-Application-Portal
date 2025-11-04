@@ -2,12 +2,14 @@ import express from "express";
 import { errorHandler } from "./middlewares/error.middleware.js";
 import healthcheckRouter from "./routes/health.routes.js";
 import authRouter from "./routes/auth.routes.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
 app.use(express.json({ limit: "100kb" }));
 app.use(express.urlencoded({ extended: true, limit: "100kb" }));
 app.use(express.static("public"));
+app.use(cookieParser());
 
 // Root endpoint
 app.get("/", (_, res) => {
