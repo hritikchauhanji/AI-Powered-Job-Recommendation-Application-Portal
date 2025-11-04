@@ -3,6 +3,26 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import { USER_COOKIE_EXPIRY } from "../constants.js";
+
+// generate user accessToken and refreshToken
+const generateAccessAndRefereshTokens = async (userId) => {
+  try {
+    const user = await User.findById(userId);
+    const accessToken = user.generateAccessToken();
+    const refreshToken = user.generateRefreshToken();
+
+    user.refreshToken = refreshToken;
+    await user.save({ validateBeforeSave: false });
+
+    return { accessToken, refreshToken };
+  } catch (error) {
+    throw new ApiError(
+      500,
+      "Something went wrong while generating referesh and access token"
+    );
+  }
+};
 
 // register user
 const registerUser = asyncHandler(async (req, res) => {
@@ -58,4 +78,56 @@ const registerUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(201, createdUser, "User registered Successfully"));
 });
 
-export { registerUser };
+// login user
+const loginUser = asyncHandler(async (req, res) => {
+  const { identifier, password } = req.body; // identifier can be email or username
+
+  if (!identifier) {
+    throw new ApiError(400, "Email or Username is required");
+  }
+
+  // Check if identifier is email or username
+  const isEmail = identifier.includes("@");
+
+  const user = await User.findOne(
+    isEmail ? { email: identifier } : { username: identifier.toLowerCase() }
+  );
+
+  if (!user) {
+    throw new ApiError(404, "User does not exist");
+  }
+
+  const isPasswordValid = await user.isPasswordCorrect(password);
+  if (!isPasswordValid) {
+    throw new ApiError(401, "Invalid user credentials");
+  }
+
+  const { accessToken, refreshToken } = await generateAccessAndRefereshTokens(
+    user._id
+  );
+
+  const options = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+    maxAge: USER_COOKIE_EXPIRY,
+  };
+
+  const loggedInUser = await User.findById(user._id).select(
+    "-password -refreshToken -resume"
+  );
+
+  return res
+    .status(200)
+    .cookie("accessToken", accessToken, options)
+    .cookie("refreshToken", refreshToken, options)
+    .json(
+      new ApiResponse(
+        200,
+        { user: loggedInUser, accessToken },
+        "User logged in successfully"
+      )
+    );
+});
+
+export { registerUser, loginUser };
