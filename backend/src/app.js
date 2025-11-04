@@ -4,8 +4,8 @@ import healthcheckRouter from "./routes/health.routes.js";
 import authRouter from "./routes/auth.routes.js";
 const app = express();
 
-app.use(express.json({ limit: "100kb" }));
-app.use(express.urlencoded({ extended: true, limit: "100kb" }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // Root endpoint
