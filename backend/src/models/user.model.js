@@ -35,6 +35,16 @@ const userSchema = new Schema(
       default: UserRolesEnum.CONDIDATE,
       required: true,
     },
+    profileImage: {
+      public_id: {
+        type: String,
+        default: "",
+      },
+      url: {
+        type: String,
+        default: "",
+      },
+    },
     forgotPasswordToken: {
       type: String,
     },
@@ -64,16 +74,6 @@ const userSchema = new Schema(
       trim: true,
     },
     resume: {
-      public_id: {
-        type: String,
-        default: "",
-      },
-      url: {
-        type: String,
-        default: "",
-      },
-    },
-    profileImage: {
       public_id: {
         type: String,
         default: "",

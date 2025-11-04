@@ -2,18 +2,7 @@ import { User } from "../models/user.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import {
-  USER_COOKIE_EXPIRY,
-  USER_TEMPORARY_TOKEN_EXPIRY,
-} from "../constants.js";
-import jwt from "jsonwebtoken";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
-import crypto from "crypto";
-import { sendEmail } from "../utils/emails/sendEmail.js";
-import {
-  forgotPasswordEmailTemplate,
-  forgotPasswordPlainTextTemplate,
-} from "../utils/emails/forgotPasswordTemplate.js";
 
 // register user
 const registerUser = asyncHandler(async (req, res) => {
@@ -57,7 +46,7 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   const createdUser = await User.findById(user._id).select(
-    "-password -refreshToken"
+    "-password -refreshToken -resume"
   );
 
   if (!createdUser) {
