@@ -5,6 +5,8 @@ import authRouter from "./routes/auth.routes.js";
 import cookieParser from "cookie-parser";
 import jobRouter from "./routes/job.routes.js";
 import applicationRouter from "./routes/application.routes.js";
+import userRouter from "./routes/user.routes.js";
+import adminRouter from "./routes/admin.routes.js";
 
 const app = express();
 
@@ -29,6 +31,8 @@ app.use("/api/v1/health", healthcheckRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", jobRouter);
 app.use("/api/v1/applications", applicationRouter);
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/admin", adminRouter);
 
 app.use(errorHandler);
 
