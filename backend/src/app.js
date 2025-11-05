@@ -3,6 +3,8 @@ import { errorHandler } from "./middlewares/error.middleware.js";
 import healthcheckRouter from "./routes/health.routes.js";
 import authRouter from "./routes/auth.routes.js";
 import cookieParser from "cookie-parser";
+import jobRouter from "./routes/job.routes.js";
+import applicationRouter from "./routes/application.routes.js";
 
 const app = express();
 
@@ -25,6 +27,8 @@ app.get("/", (_, res) => {
 //routes
 app.use("/api/v1/health", healthcheckRouter);
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/jobs", jobRouter);
+app.use("/api/v1/applications", applicationRouter);
 
 app.use(errorHandler);
 

@@ -4,7 +4,7 @@ import {
   AvailableStatus,
   JobTypeEnum,
   StatusEnum,
-} from "../constants";
+} from "../constants.js";
 
 const jobSchema = new Schema(
   {

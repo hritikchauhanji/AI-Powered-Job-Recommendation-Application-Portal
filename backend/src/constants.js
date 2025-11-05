@@ -1,7 +1,7 @@
 export const DB_NAME = "job_portal_db";
 
 export const UserRolesEnum = {
-  CONDIDATE: "conditate",
+  CONDIDATE: "condidate",
   RECRUITER: "recruiter",
   ADMIN: "admin",
 };
@@ -26,6 +26,10 @@ export const StatusEnum = {
   CLOSED: "closed",
   PENDING: "pending",
   ARCHIVED: "archived",
+  REVIEWED: "reviewed",
+  SHORTLISTED: "shortlisted",
+  REJECTED: "rejected",
+  ACCEPTED: "accepted",
 };
 
 export const AvailableStatus = Object.values(StatusEnum);
