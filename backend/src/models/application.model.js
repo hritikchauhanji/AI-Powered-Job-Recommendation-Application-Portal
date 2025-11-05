@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { AvailableStatus, StatusEnum } from "../constants";
+import { AvailableStatus, StatusEnum } from "../constants.js";
 
 const applicationSchema = new Schema(
   {
