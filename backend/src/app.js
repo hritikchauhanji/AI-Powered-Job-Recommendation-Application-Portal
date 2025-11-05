@@ -7,6 +7,7 @@ import jobRouter from "./routes/job.routes.js";
 import applicationRouter from "./routes/application.routes.js";
 import userRouter from "./routes/user.routes.js";
 import adminRouter from "./routes/admin.routes.js";
+import recommendationRouter from "./routes/recommendation.routes.js";
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use("/api/v1/jobs", jobRouter);
 app.use("/api/v1/applications", applicationRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/admin", adminRouter);
+app.use("/api/v1/recommendations", recommendationRouter);
 
 app.use(errorHandler);
 
