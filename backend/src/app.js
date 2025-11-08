@@ -8,9 +8,18 @@ import applicationRouter from "./routes/application.routes.js";
 import userRouter from "./routes/user.routes.js";
 import adminRouter from "./routes/admin.routes.js";
 import recommendationRouter from "./routes/recommendation.routes.js";
+import cors from "cors";
 
 const app = express();
 
+app.use(
+  cors({
+    origin: [process.env.FRONTEND_URL, process.env.FRONTEND_URL_PROD],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use(express.json({ limit: "100kb" }));
 app.use(express.urlencoded({ extended: true, limit: "100kb" }));
 app.use(express.static("public"));
