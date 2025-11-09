@@ -1,10 +1,10 @@
-# 🚀 AI-Powered Job Recommendation & Application Portal
+# AI-Powered Job Recommendation & Application Portal
 
 > A modern full-stack web application leveraging Machine Learning to provide intelligent job recommendations. Built with React, Node.js, MongoDB, and Python ML API.
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Project Overview](#project-overview)
 - [Features](#features)
@@ -22,7 +22,7 @@
 
 ---
 
-## 📖 Project Overview
+## Project Overview
 
 This full-stack application connects job seekers with relevant opportunities using AI-powered recommendations. The platform supports three user roles (Candidates, Recruiters, Admins) with dedicated dashboards, secure JWT authentication with refresh tokens, real-time notifications, and comprehensive analytics.
 
@@ -36,33 +36,33 @@ This full-stack application connects job seekers with relevant opportunities usi
 
 ---
 
-## ✨ Features
+## Features
 
-### 👤 For Candidates
-- ✅ User registration with profile image upload
-- 🔐 Secure login with JWT authentication
-- 📝 Complete profile management (skills, experience, education)
-- 📄 Resume upload (PDF)
-- 🤖 AI-powered job recommendations
-- 🔍 Advanced job search with filters
-- 📬 Apply for jobs with cover letters
-- 📊 Track application status (pending, shortlisted, accepted, rejected)
+### For Candidates
+- User registration with profile image upload
+- Secure login with JWT authentication
+- Complete profile management (skills, experience, education)
+- Resume upload (PDF)
+- AI-powered job recommendations
+- Advanced job search with filters
+- Apply for jobs with cover letters
+- Track application status (pending, shortlisted, accepted, rejected)
 
-### 👔 For Recruiters
-- 📢 Post new job listings
-- ✏️ Edit and manage job postings
-- 👥 View candidate applications
-- 📈 Recruiter dashboard with statistics
-- 🎯 Update application status
+### For Recruiters
+- Post new job listings
+- Edit and manage job postings
+- View candidate applications
+- Recruiter dashboard with statistics
+- Update application status
 
-### 🛡️ For Admins
-- 📊 System-wide analytics dashboard
-- 👥 User management (view all users, change roles, delete users)
-- ✅ Job approval/rejection workflow
-- 📉 View pending jobs
-- 🗑️ System oversight and moderation
+### For Admins
+- System-wide analytics dashboard
+- User management (view all users, change roles, delete users)
+- Job approval/rejection workflow
+- View pending jobs
+- System oversight and moderation
 
-### 🔒 Security Features
+### Security Features
 - JWT-based authentication
 - HTTP-only refresh tokens
 - Automatic token refresh (no repeated logins)
@@ -72,7 +72,7 @@ This full-stack application connects job seekers with relevant opportunities usi
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Frontend
 - **React 18** - Modern UI library
@@ -109,7 +109,7 @@ This full-stack application connects job seekers with relevant opportunities usi
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────┐                 ┌──────────────────┐
@@ -143,7 +143,7 @@ This full-stack application connects job seekers with relevant opportunities usi
 
 ---
 
-## 🗃️ Database Schema
+## Database Schema
 
 ### Collections
 
@@ -218,7 +218,7 @@ This full-stack application connects job seekers with relevant opportunities usi
 
 ---
 
-## 📁 Folder Structure
+## Folder Structure
 
 ```
 project-root/
@@ -319,7 +319,7 @@ project-root/
 
 ---
 
-## 📡 API Documentation
+## API Documentation
 
 ### Authentication Routes (`/api/auth`)
 
@@ -384,7 +384,7 @@ project-root/
 
 ---
 
-## 🚀 Setup & Installation
+## Setup & Installation
 
 ### Prerequisites
 - Node.js (v16 or higher)
@@ -410,21 +410,19 @@ npm install
 ```env
 PORT=5000
 MONGODB_URI=mongodb://localhost:27017/job-portal
-CORS_ORIGIN=http://localhost:5173
+FRONTEND_URL=http://localhost:5173
 
 ACCESS_TOKEN_SECRET=your_access_token_secret_here
-ACCESS_TOKEN_EXPIRY=1d
+ACCESS_TOKEN_EXPIRY=20min
 REFRESH_TOKEN_SECRET=your_refresh_token_secret_here
-REFRESH_TOKEN_EXPIRY=10d
+REFRESH_TOKEN_EXPIRY=7d
 
 CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASSWORD=your_gmail_app_password
+RESEND_API_KEY=
+ML_API_URL=http://localhost:8001/api
 
 NODE_ENV=development
 ```
@@ -502,7 +500,7 @@ ML API runs on `http://localhost:5001`
 
 ---
 
-## 🤖 AI Model Workflow
+## AI Model Workflow
 
 ### Overview
 The ML recommendation engine uses Natural Language Processing to match candidate skills with job requirements.
@@ -537,7 +535,7 @@ const response = await axios.post('http://localhost:5001/recommend', {
 
 ---
 
-## 🧪 Testing Strategy
+## Testing Strategy
 
 ### Unit Tests
 - **Backend**: Jest + Supertest
@@ -583,7 +581,7 @@ jobs:
 
 ---
 
-## 🌐 Deployment Guide
+## Deployment Guide
 
 ### Backend Deployment (Render/Railway)
 
@@ -618,7 +616,7 @@ jobs:
 
 ---
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 - **Advanced AI Models**: BERT, GPT for better recommendations
 - **In-app Messaging**: Chat between candidates and recruiters
@@ -634,21 +632,20 @@ jobs:
 
 ---
 
-## 👨‍💻 Contributors
+## Contributors
 
-- **[Your Name]** - Full Stack Developer
-- **Email**: your.email@example.com
-- **GitHub**: [@yourusername](https://github.com/yourusername)
+- **Hritik Chauhan** - Full Stack Developer
+- **Email**: hritikchji@gmail.com
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - React and Redux Toolkit teams
 - MongoDB and Mongoose
@@ -658,7 +655,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**⭐ If you found this project helpful, please give it a star!**
+**If you found this project helpful, please give it a star!**
 
 ---
 
