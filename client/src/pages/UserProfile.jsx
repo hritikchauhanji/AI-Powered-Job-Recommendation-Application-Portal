@@ -4,6 +4,8 @@ import { User, Mail, Briefcase, MapPin, BookOpen, Upload } from "lucide-react";
 import apiClient from "../api/axios";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import ErrorAlert from "../components/common/ErrorAlert";
+import { updateProfileImage } from "../store/slices/userSlice";
+import { getCurrentUser } from "../store/slices/authSlice";
 
 export default function UserProfile() {
   const { user } = useAppSelector((state) => state.auth);
@@ -12,6 +14,11 @@ export default function UserProfile() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [resumeFile, setResumeFile] = useState(null);
+  const [profileImageFile, setProfileImageFile] = useState(null);
+  const [profileImagePreview, setProfileImagePreview] = useState(
+    user?.profileImage?.url || ""
+  );
+  const [imageChanged, setImageChanged] = useState(false);
 
   const [formData, setFormData] = useState({
     name: user?.name || "",
@@ -22,9 +29,47 @@ export default function UserProfile() {
     education: user?.education || "",
   });
 
+  const dispatch = useAppDispatch();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  // Profile Image Select Handler
+  const handleProfileImageChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setProfileImageFile(file);
+      setProfileImagePreview(URL.createObjectURL(file));
+      setImageChanged(true);
+    }
+  };
+
+  const handleCancelImage = () => {
+    setProfileImageFile(null);
+    setProfileImagePreview(user?.profileImage?.url || "");
+    setImageChanged(false);
+  };
+
+  // Profile Image Upload Handler (Redux thunk)
+  const handleProfileImageUpload = async (e) => {
+    e.preventDefault();
+    if (!profileImageFile) return;
+    setLoading(true);
+    setError("");
+    try {
+      await dispatch(updateProfileImage(profileImageFile)).unwrap();
+      setSuccess(true);
+      setProfileImageFile(null);
+      await dispatch(getCurrentUser());
+      setTimeout(() => setSuccess(false), 3000);
+    } catch (err) {
+      setError(
+        typeof err === "string" ? err : "Failed to upload profile image"
+      );
+    }
+    setLoading(false);
   };
 
   const handleProfileUpdate = async (e) => {
@@ -92,8 +137,52 @@ export default function UserProfile() {
         {/* Profile Header */}
         <div className="card mb-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-6 pb-6 border-b">
-            <div>
-              {user?.profileImage?.url ? (
+            <div className="relative">
+              {/* ----- Show picker in edit mode ----- */}
+              {editing ? (
+                <form onSubmit={handleProfileImageUpload} className="relative">
+                  {/* Always show preview */}
+                  <img
+                    src={profileImagePreview || "/default-avatar.png"}
+                    alt={user?.name || "Profile"}
+                    className="h-24 w-24 rounded-full object-cover ring-2 ring-primary-200 transition"
+                  />
+
+                  {/* Upload input (hidden when image changed) */}
+                  {!imageChanged && (
+                    <label className="cursor-pointer absolute inset-0 flex items-center justify-center bg-black/20 rounded-full opacity-0 hover:opacity-100 transition">
+                      <Upload className="h-6 w-6 text-white" />
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={handleProfileImageChange}
+                      />
+                    </label>
+                  )}
+
+                  {/* Save + Cancel buttons */}
+                  {imageChanged && (
+                    <div className="mt-3 flex gap-1">
+                      <button
+                        type="submit"
+                        disabled={loading}
+                        className="btn-primary"
+                      >
+                        {loading ? "Uploading..." : "Save Profile Image"}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={handleCancelImage}
+                        className="btn-secondary"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  )}
+                </form>
+              ) : user?.profileImage?.url ? (
                 <img
                   src={user.profileImage.url}
                   alt={user.name}
