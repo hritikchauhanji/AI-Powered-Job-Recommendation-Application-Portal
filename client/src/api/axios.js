@@ -31,15 +31,20 @@ apiClient.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const { data } = await axios.post(
-          `${API_BASE_URL}/auth/refresh-token`,
+        const { data } = await apiClient.post(
+          "/auth/refresh-token",
           {},
-          { withCredentials: true }
+          {
+            withCredentials: true,
+          }
         );
 
         const newAccessToken = data.data.accessToken;
+
         localStorage.setItem("accessToken", newAccessToken);
+
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+
         return apiClient(originalRequest);
       } catch (refreshError) {
         localStorage.removeItem("accessToken");

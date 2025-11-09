@@ -60,23 +60,6 @@ export const getCurrentUser = createAsyncThunk(
   }
 );
 
-// Refresh access token
-export const refreshAccessToken = createAsyncThunk(
-  "auth/refreshToken",
-  async (_, { rejectWithValue }) => {
-    try {
-      const { data } = await apiClient.post("/auth/refresh-token");
-      localStorage.setItem("accessToken", data.data.accessToken);
-      return data.data;
-    } catch (error) {
-      localStorage.removeItem("accessToken");
-      return rejectWithValue(
-        error.response?.data?.message || "Failed to refresh token"
-      );
-    }
-  }
-);
-
 // Forgot password request
 export const forgotPasswordRequest = createAsyncThunk(
   "auth/forgotPassword",
@@ -186,16 +169,6 @@ const authSlice = createSlice({
       })
       .addCase(getCurrentUser.rejected, (state) => {
         state.loading = false;
-        state.isAuthenticated = false;
-      })
-      // Refresh token
-      .addCase(refreshAccessToken.fulfilled, (state, action) => {
-        state.accessToken = action.payload.accessToken;
-        state.isAuthenticated = true;
-      })
-      .addCase(refreshAccessToken.rejected, (state) => {
-        state.user = null;
-        state.accessToken = null;
         state.isAuthenticated = false;
       })
       // Forgot password
