@@ -52,9 +52,13 @@ const generateAccessAndRefereshTokens = async (userId) => {
 
 // register user
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, username, password } = req.body;
+  const { name, email, username, password, role } = req.body;
 
-  if ([name, email, username, password].some((field) => field?.trim() === "")) {
+  if (
+    [name, email, username, password, role].some(
+      (field) => field?.trim() === ""
+    )
+  ) {
     throw new ApiError(400, "All fields are required");
   }
 
@@ -89,6 +93,7 @@ const registerUser = asyncHandler(async (req, res) => {
       url: profileImageUrl,
     },
     password,
+    role,
   });
 
   const createdUser = await User.findById(user._id).select(

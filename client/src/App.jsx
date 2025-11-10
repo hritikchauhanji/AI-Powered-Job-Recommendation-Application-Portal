@@ -24,7 +24,7 @@ const RecruiterDashboard = lazy(() => import("./pages/RecruiterDashboard"));
 
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center">
-    <LoadingSpinner message="Loading page..." />
+    <LoadingSpinner message="Loading..." />
   </div>
 );
 

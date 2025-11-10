@@ -39,7 +39,7 @@ export default function Dashboard() {
 
         <div className="mb-12">
           <h1 className="text-4xl font-bold text-gray-900">
-            Welcome back, {user?.name}! 👋
+            Welcome back, {user?.name}!
           </h1>
           <p className="text-gray-600 mt-2">
             Here are your AI-powered job recommendations

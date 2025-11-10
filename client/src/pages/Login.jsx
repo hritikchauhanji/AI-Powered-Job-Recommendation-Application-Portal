@@ -46,7 +46,7 @@ export default function Login() {
               <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400 pointer-events-none" />
               <input
                 type="text"
-                placeholder="john@example.com"
+                placeholder="your@example.com"
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
                 className="input-field pl-10"
@@ -102,7 +102,7 @@ export default function Login() {
         </div>
 
         <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
-          <strong>Demo:</strong> john@example.com / Password@123
+          <strong>Demo:</strong> your@example.com / Password@123
         </div>
       </div>
     </div>

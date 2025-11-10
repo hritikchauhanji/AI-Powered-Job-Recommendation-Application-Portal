@@ -49,6 +49,7 @@ export default function Register() {
     fd.append("username", formData.username);
     fd.append("email", formData.email);
     fd.append("password", formData.password);
+    fd.append("role", formData.role);
     if (formData.profileImage) fd.append("profileImage", formData.profileImage);
 
     const result = await dispatch(register(fd));
@@ -111,7 +112,7 @@ export default function Register() {
             <input
               type="text"
               name="name"
-              placeholder="John Doe"
+              placeholder="name"
               value={formData.name}
               onChange={handleChange}
               className="input-field"
@@ -126,7 +127,7 @@ export default function Register() {
             <input
               type="text"
               name="username"
-              placeholder="johndoe"
+              placeholder="username"
               value={formData.username}
               onChange={handleChange}
               className="input-field"
@@ -143,7 +144,7 @@ export default function Register() {
               <input
                 type="email"
                 name="email"
-                placeholder="john@example.com"
+                placeholder="user@example.com"
                 value={formData.email}
                 onChange={handleChange}
                 className="input-field pl-10"
@@ -183,8 +184,8 @@ export default function Register() {
               onChange={handleChange}
               className="input-field"
             >
-              <option value="CONDIDATE">Job Seeker</option>
-              <option value="RECRUITER">Recruiter</option>
+              <option value="condidate">Job Seeker</option>
+              <option value="recruiter">Recruiter</option>
             </select>
           </div>
 
